@@ -23,4 +23,8 @@ http://localhost:3000
 - *Integrate Bootstrap*
 - *Separate into Header, Body, Footer*
 - *Add auto-scroll to bottom of message list*
-- Use vh, vw?
+- *Do not send empty messages from clients*
+- Do not respond to sender from server
+- Distinguish between sent and received messages
+- Identify client user
+- Authenticate client user
