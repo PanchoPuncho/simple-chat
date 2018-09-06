@@ -1,0 +1,21 @@
+{
+  "name": "Simple Chat",
+  "description": "My simple socket.io app",
+  "website": "",
+  "repository": "https://github.com/PanchoPuncho/simple-chat",
+  "logo": "",
+  "success_url": "/",
+  "keywords": [
+    "node",
+    "express",
+    "socket.io",
+    "realtime",
+    "websocket"
+  ],
+  "scripts": {
+  },
+  "addons": [
+  ],
+  "env": {
+  }
+}
