@@ -6,6 +6,10 @@ $(function () {
         return false;
     });
     socket.on('message', function(msg) {
-        $('#messages').append($('<li>').text(msg));
+        var list = $('#messages');
+        list.append($('<li>').text(msg));
+        $('div').animate({
+            scrollTop: $("#messages li").last().offset().top
+        }, 'fast');
     });
 });

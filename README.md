@@ -1,16 +1,26 @@
 
 # Simple Chat Client and Server
 
-### Server Dependencies
-npm install --save express@4.15.2  
-npm install --save socket.io
+### References
+https://socket.io/get-started/chat
 
-### Client Dependencies
-/socket.io/socket.io.js  
-https://code.jquery.com/jquery-1.11.1.js
+### Repository
+https://github.com/PanchoPuncho/simple-chat
+
+### Server Dependencies
+express@4.15.2  
+socket.io  
+JQuery  
+Bootstrap
 
 ### Run App
 node src/js/server
 
 ### Navigate To
 http://localhost:3000
+
+# ToDo
+- *Integrate Bootstrap*
+- *Separate into Header, Body, Footer*
+- *Add auto-scroll to bottom of message list*
+- Use vh, vw?

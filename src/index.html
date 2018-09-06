@@ -1,16 +1,77 @@
-<!doctype html>
-<html>
-    <head>
-        <title>Simple Socket.IO Chat</title>
-        <link rel="stylesheet" href="css/styles.css">
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-        <script type="text/javascript" src="js/client.js"></script>
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Simple Socket.IO Chat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <!-- HEADER -->
+    <nav id="header" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Simple Chat</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">Menu <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MESSAGES -->
+    <div id="content" class="container-fluid">
         <ul id="messages"></ul>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer" class="container-fluid">
         <form action="">
-            <input id="message" autocomplete="off" /><button>Send</button>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <input id="message" placeholder="Type your message" autocomplete="off" class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="form-control btn-primary">Send</button>
+                </div>
+            </div>
         </form>
-    </body>
+        </footer>
+    </div>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Local style changes -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <!-- JQuery -->
+    <!--script src="https://code.jquery.com/jquery-1.11.1.js"></script-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <!-- Local javascript (client code) -->
+    <script type="text/javascript" src="js/client.js"></script>
+</body>
+
 </html>
