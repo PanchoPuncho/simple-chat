@@ -10,10 +10,7 @@ body {
 
 #messages li {
     padding: 5px 10px;
-}
-
-#messages li:nth-child(odd) {
-    background: #eee;
+    word-break: break-all;
 }
 
 #header,
@@ -39,4 +36,12 @@ body {
     bottom: 0;
     height: 70px;
     background: #e7e7e7;
+}
+
+.primary {
+    color: #444 !important;
+}
+
+.secondary {
+    color: #8C2624 !important;
 }

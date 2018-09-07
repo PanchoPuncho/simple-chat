@@ -24,7 +24,10 @@ http://localhost:3000
 - *Separate into Header, Body, Footer*
 - *Add auto-scroll to bottom of message list*
 - *Do not send empty messages from clients*
-- Do not respond to sender from server
-- Distinguish between sent and received messages
+- *Do not respond to sender from server*
+- *Distinguish between sent and received messages in client*
+- *Limit to 140 characters*
+- *Ensure text remains within list item*
 - Identify client user
+- Display users
 - Authenticate client user
