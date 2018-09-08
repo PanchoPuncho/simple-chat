@@ -12,10 +12,7 @@
     "realtime",
     "websocket"
   ],
-  "scripts": {
-  },
-  "addons": [
-  ],
-  "env": {
-  }
+  "scripts": {},
+  "addons": [],
+  "env": {}
 }

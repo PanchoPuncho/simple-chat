@@ -20,7 +20,7 @@
                     </li>
                     <ul class="collapse" id="products">
                         <li ng-repeat="user in data.users"><a href="#"><span class="glyphicon glyphicon-user"></span>
-                                {{ user }}</a></li>
+                                {{ user.username }}</a></li>
                     </ul>
                     <li></li>
                     <li>
@@ -32,10 +32,10 @@
             </div>
         </div>
         <div class="container-fluid" id="main">
-            <div ng-show="data.username" id="message-box" class="row">
+            <div ng-show="user.username" id="message-box" class="row">
                 <div class="col-md-12">
                     <h1 class="secondary-color">Welcome, <span class="primary-color">{{
-                            data.username }}!</span></h1>
+                            user.username }}!</span></h1>
                     <ul id="messages" class="list-group"></ul>
                 </div>
             </div>
@@ -70,6 +70,8 @@
                     </div>
                     <form action="">
                         <div class="modal-body">
+                            <h5 ng-show="login.warning" class="primary-color">{{ login.warning }}</h5>
+                            <br ng-show="login.warning" />
                             <input id="login-username" ng-model="login.username" placeholder="Enter your username"
                                 autocomplete="off" maxlength="32" class="form-control" required />
                             <input id="login-password" type="password" ng-model="login.password" placeholder="Enter your password"
@@ -81,7 +83,7 @@
                         <div class="modal-footer">
                             <button ng-show="!login.register" type="submit" class="form-control btn btn-danger"
                                 ng-click="validateLogin()">Sign In</button>
-                            <button ng-show="login.register" type="submit" class="form-control btn btn-danger" ng-click="validateLogin()">Register</button>
+                            <button ng-show="login.register" type="submit" class="form-control btn btn-danger" ng-click="validateRegister()">Register</button>
                         </div>
                     </form>
                 </div>
@@ -104,7 +106,6 @@
     <!-- Local style changes -->
     <link rel="stylesheet" href="css/styles.css">
     <!-- Local javascript (client code) -->
-    <script type="text/javascript" src="js/client.js"></script>
     <script src="js/chatCtrl.js"></script>
 </body>
 

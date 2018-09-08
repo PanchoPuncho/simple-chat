@@ -3,6 +3,7 @@
 
 ### References
 https://socket.io/get-started/chat
+https://www.npmjs.com/package/socketio-auth
 
 ### Repository
 https://github.com/PanchoPuncho/simple-chat
@@ -29,6 +30,7 @@ http://localhost:3000
 - *Limit to 140 characters*
 - *Ensure text remains within list item*
 - *Login page*
-- Identify user on server
-- Display users on client
-- User signup (create a username and password), with authentication
+- *Identify user on server*
+- *Display users on client*
+- *Add user authentication*
+- Add user signup

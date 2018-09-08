@@ -5,6 +5,7 @@
     "dependencies": {
         "express": "^4.15.2",
         "jshint": "^2.9.6",
-        "socket.io": "^2.1.1"
+        "socket.io": "^2.1.1",
+        "socketio-auth": "^0.1.1"
     }
 }
