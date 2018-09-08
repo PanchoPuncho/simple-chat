@@ -13,7 +13,7 @@ $(function () {
             appendSentMessage(msg.val());
             // Clear message
             msg.val('');
-            return true;
+            return false;
         } else {
             console.log("Attempted to send an empty message. Request was ignored.");
             // Clear message
