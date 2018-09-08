@@ -157,6 +157,7 @@ body {
 
 body {
     font: 13px Helvetica, Arial;
+    background-color: #f1f1f1;
 }
 
 #messages li {
@@ -168,10 +169,24 @@ body {
     padding: 0px 5px 70px 5px;
 }
 
-.primary {
+.primary-color {
+    color: #8C2624 !important;
+}
+
+.primary-background {
+    background-color: #8C2624 !important;
+}
+
+.secondary-color {
     color: #444 !important;
 }
 
-.secondary {
-    color: #8C2624 !important;
+.secondary-background {
+    background-color: #444 !important;
+}
+
+.modal {
+    text-align: center;
+    padding: 0 !important;
+    top: 100px;
 }

@@ -1,5 +1,5 @@
 angular.module('myApp', []).controller('chatCtrl', function ($scope) {
-    // Contains all data pertinent to the application
+    // Contains all data pertinent to the user
     $scope.data = {
         username: "",
         msg: "",
@@ -8,19 +8,46 @@ angular.module('myApp', []).controller('chatCtrl', function ($scope) {
             "bob",
             "the",
             "builder"
-        ],
-        welcome: ""
+        ]
+    };
+
+    // Contains all data pertinent to the login
+    $scope.login = {
+        register: false,
+        username: "",
+        password: "",
+        passwordConfirmation: ""
     };
 
     /**
-     * Validate that a username is provided before granting access to the chat.
+     * Validate the login/registration attempt before granting access to the chat.
      */
     $scope.validateLogin = function () {
-        if ($scope.data.username && $scope.data.username.trim() !== "") {
-            angular.element('#loginModal').modal('hide');
-            $scope.data.welcome = "Welcome, " + $scope.data.username + "!";
+        if ($scope.login.username && $scope.login.username.trim() !== "") {
+            if ($scope.login.password && $scope.login.password.trim() !== "") {
+                if (!$scope.login.register) {
+                    // Sign In
+                    angular.element('#loginModal').modal('hide');
+                    $scope.data.username = $scope.login.username;
+                } else {
+                    // Register
+                    if ($scope.login.passwordConfirmation &&
+                        $scope.login.passwordConfirmation.trim() !== "" &&
+                        $scope.login.password === $scope.login.passwordConfirmation) {
+                        angular.element('#loginModal').modal('hide');
+                    } else {
+                        // Clear out values if invalid password combo
+                        $('#login-password').val('');
+                        $('#login-password-confirmation').val('');
+                    }
+                }
+            } else {
+                // Clear out invalid password
+                $('#login-password').val('');
+            }
         } else {
-            $('#username').val('');
+            // Clear out invalid username
+            $('#login-username').val('');
         }
     };
 

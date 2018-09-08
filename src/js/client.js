@@ -32,7 +32,7 @@ $(function () {
  */
 function appendSentMessage(msg) {
     var list = $('#messages');
-    list.append('<div class="row"><li class="list-group-item list-group-item-info col-sm-6 col-sm-offset-6 text-right primary">' + msg + '</li></div>');
+    list.append('<div class="row"><li class="list-group-item list-group-item-danger col-sm-6 col-sm-offset-6 text-right primary">' + msg + '</li></div>');
     scrollToBottom();
 };
 
@@ -42,7 +42,7 @@ function appendSentMessage(msg) {
  */
 function appendReceivedMessage(msg) {
     var list = $('#messages');
-    list.append('<div class="row"><li class="list-group-item list-group-item-success col-sm-6 primary">' + msg + '</li></div>');
+    list.append('<div class="row"><li class="list-group-item list-group-item-primary col-sm-6 primary">' + msg + '</li></div>');
     scrollToBottom();
 };
 

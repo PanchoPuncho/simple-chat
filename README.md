@@ -28,7 +28,7 @@ http://localhost:3000
 - *Distinguish between sent and received messages in client*
 - *Limit to 140 characters*
 - *Ensure text remains within list item*
-- Login page
-- Identify client user
-- Display users
+- *Login page*
+- Identify user on server
+- Display users on client
 - User signup (create a username and password), with authentication
