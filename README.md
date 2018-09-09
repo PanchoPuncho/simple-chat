@@ -37,4 +37,4 @@ http://localhost:3000
 - *Add user authentication*
 - *Add user signup*
 - *Move users to a database so we can maintain state past the server's life*
-- Identify message sender on recipient clients
+- *Identify message sender on recipient clients*

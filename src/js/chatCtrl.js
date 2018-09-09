@@ -153,7 +153,7 @@ angular.module('myApp', []).controller('chatCtrl', function ($scope) {
      */
     function appendReceivedMessage(msg) {
         var list = $('#messages');
-        list.append('<div class="row"><li class="list-group-item list-group-item-primary col-sm-6 primary">' + msg + '</li></div>');
+        list.append('<div class="row"><li class="list-group-item list-group-item-primary col-sm-6 primary">' + msg.username + ': ' + msg.message + '</li></div>');
         scrollToBottom();
     }
 

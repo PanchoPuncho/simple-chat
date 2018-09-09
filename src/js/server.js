@@ -88,13 +88,10 @@ function authenticate(socket, data, callback) {
  * @param {*} data 
  */
 function postAuthenticate(socket, data) {
-    // Find the user in the db
     User.findOne({
         username: data.username
     }).then(function (user) {
-        // Assign the user to the socket
         socket.client.user = user;
-
         toggleUserState(user.username, true);
         sendServerMessage(user.username + ' connected');
     });
@@ -104,7 +101,10 @@ function postAuthenticate(socket, data) {
      * with all other clients.
      */
     socket.on('message', function (msg) {
-        socket.broadcast.emit('message', msg);
+        socket.broadcast.emit('message', {
+            username: socket.client.user.username,
+            message: msg
+        });
     });
 }
 
@@ -114,10 +114,7 @@ function postAuthenticate(socket, data) {
  */
 function disconnect(socket) {
     if (socket.client.user !== undefined) {
-        // Deactivate the user
         toggleUserState(socket.client.user.username, false);
-
-        // Notify the users of newly disconnected user
         sendServerMessage(socket.client.user.username + ' disconnected');
     }
 }
@@ -152,7 +149,6 @@ function sendActiveUsers() {
     }).sort({
         username: 1
     }).then(function (users) {
-        console.log(JSON.stringify(users));
         ioServer.emit('users', users);
     });
 }
