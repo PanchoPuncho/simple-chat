@@ -9,7 +9,7 @@ const User = require('./User');
 /**
  * Configure socketio-auth
  */
-const auth = require('socketio-auth')(ioServer, {
+require('socketio-auth')(ioServer, {
     authenticate: authenticate,
     postAuthenticate: postAuthenticate,
     disconnect: disconnect,
@@ -70,7 +70,6 @@ function authenticate(socket, data, callback) {
                     // User exists. Validate password
                     callback(null, user && user.validPassword(password));
                 } else {
-                    console.log(username + ' does not exist.');
                     // User does not exist
                     callback(null, false);
                 }

@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div ng-app="myApp" ng-controller="chatCtrl">
+    <div ng-app="myApp" ng-controller="clientCtrl">
         <div class="container-fluid nav-side-menu">
             <div class="brand">Simple Chat</div>
             <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
@@ -83,7 +83,7 @@
                         <div class="modal-footer">
                             <button ng-show="!login.register" type="submit" class="form-control btn btn-danger"
                                 ng-click="validateLogin()">Sign In</button>
-                            <button ng-show="login.register" type="submit" class="form-control btn btn-danger" ng-click="validateLogin()">Register</button>
+                            <button ng-show="login.register" type="button" class="form-control btn btn-danger" ng-click="validateLogin()">Register</button>
                         </div>
                     </form>
                 </div>
@@ -106,7 +106,7 @@
     <!-- Local style changes -->
     <link rel="stylesheet" href="css/styles.css">
     <!-- Local javascript (client code) -->
-    <script src="js/chatCtrl.js"></script>
+    <script src="js/clientCtrl.js"></script>
 </body>
 
 </html>

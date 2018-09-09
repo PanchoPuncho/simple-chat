@@ -1,4 +1,4 @@
-angular.module('myApp', []).controller('chatCtrl', function ($scope) {
+angular.module('myApp', []).controller('clientCtrl', function ($scope) {
     // Contains all data pertinent to the app
     $scope.data = {
         msg: '',
@@ -66,7 +66,6 @@ angular.module('myApp', []).controller('chatCtrl', function ($scope) {
      */
     function connect() {
         var socket = io();
-        var list = $('#messages');
         var msg = $('#msg');
 
         socket.on('connect', function () {
@@ -153,7 +152,7 @@ angular.module('myApp', []).controller('chatCtrl', function ($scope) {
      */
     function appendReceivedMessage(msg) {
         var list = $('#messages');
-        list.append('<div class="row"><li class="list-group-item list-group-item-primary col-sm-6 primary">' + msg.username + ': ' + msg.message + '</li></div>');
+        list.append('<div class="row"><li class="list-group-item list-group-item-primary col-sm-6 primary"><span class="primary-color">' + msg.username + ': </span>' + msg.message + '</li></div>');
         scrollToBottom();
     }
 
