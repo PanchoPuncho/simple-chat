@@ -4,6 +4,11 @@ const http = require('http');
 const server = http.Server(app);
 const io = require('socket.io');
 const ioServer = io(server);
+const User = require('./User');
+
+/**
+ * Configure socketio-auth
+ */
 const auth = require('socketio-auth')(ioServer, {
     authenticate: authenticate,
     postAuthenticate: postAuthenticate,
@@ -12,17 +17,20 @@ const auth = require('socketio-auth')(ioServer, {
 });
 
 /**
- * List of server users. TODO - move to a database.
+ *  Connect to the Database
  */
-var users = [{
-        username: "Andy",
-        password: "pass"
-    },
-    {
-        username: "Bob",
-        password: "pass"
-    }
-];
+const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+const mongoOpts = {
+    useNewUrlParser: true
+};
+const mongoUrl = 'mongodb://localhost/simple-chat';
+ioServer.use((socket, next) => {
+    mongoose
+        .connect(mongoUrl, mongoOpts)
+        .then(() => next())
+        .catch(e => console.error(e.stack));
+});
 
 /**
  * Start the server.
@@ -34,17 +42,42 @@ server.listen(3000, function () {
 
 /**
  * Authenticate a client's connection request.
+ * If a login is requested, confirm the username and password.
+ * If a registration is requested, add the new user.
  * @param {*} socket 
  * @param {*} data 
  * @param {*} callback 
  */
 function authenticate(socket, data, callback) {
-    var existingUser = findUser(data.username);
-    if (existingUser) {
-        callback(null, existingUser.password === data.password);
-    } else {
-        console.log(data.username + " not found");
-        callback(new Error('User not found'));
+    const {
+        username,
+        password,
+        register
+    } = data;
+    try {
+        if (register) {
+            User.create({
+                username: username,
+                password: password
+            }).then(function (user) {
+                callback(null, !!user);
+            });
+        } else {
+            User.findOne({
+                username: username
+            }).then(function (user) {
+                if (user) {
+                    // User exists. Validate password
+                    callback(null, user && user.validPassword(password));
+                } else {
+                    console.log(username + ' does not exist.');
+                    // User does not exist
+                    callback(null, false);
+                }
+            });
+        }
+    } catch (error) {
+        callback(error);
     }
 }
 
@@ -55,22 +88,22 @@ function authenticate(socket, data, callback) {
  * @param {*} data 
  */
 function postAuthenticate(socket, data) {
-    var existingUser = findUser(data.username);
-    socket.client.user = existingUser;
-    ioServer.emit('server-message', socket.client.user.username + ' connected');
-    ioServer.emit('users', users);
+    // Find the user in the db
+    User.findOne({
+        username: data.username
+    }).then(function (user) {
+        // Assign the user to the socket
+        socket.client.user = user;
 
-    socket.on('register', function (user) {
-        console.log('Users: ' + users);
-        console.log(user.name + ' attempted to register');
-        if (!userExists(user)) {
-            users = users.concat(user);
-        }
-        ioServer.emit('users', users);
+        toggleUserState(user.username, true);
+        sendServerMessage(user.username + ' connected');
     });
 
+    /**
+     * When receiving a message from a client, share the message
+     * with all other clients.
+     */
     socket.on('message', function (msg) {
-        console.log(socket.client.user.username + ': ' + msg);
         socket.broadcast.emit('message', msg);
     });
 }
@@ -81,19 +114,52 @@ function postAuthenticate(socket, data) {
  */
 function disconnect(socket) {
     if (socket.client.user !== undefined) {
-        ioServer.emit('server-message', socket.client.user.username + ' disconnected');
+        // Deactivate the user
+        toggleUserState(socket.client.user.username, false);
+
+        // Notify the users of newly disconnected user
+        sendServerMessage(socket.client.user.username + ' disconnected');
     }
 }
 
 /**
- * Checks if provided user exists.
- * @param {*} user 
+ * Toggle user state. Used to activate/deactivate user.
+ * Once the user state is updates, sends the list of active
+ * users to all clients.
  */
-function findUser(username) {
-    for (var i = 0; i < users.length; i++) {
-        if (users[i].username === username) {
-            return users[i];
+function toggleUserState(username, state) {
+    User.findOneAndUpdate({
+        username: username
+    }, {
+        $set: {
+            active: state
         }
-    }
-    return null;
+    }).then(function (user) {
+        sendActiveUsers();
+    });
+}
+
+/**
+ * Send the list of active users to all clients.
+ * TODO - refactor for scalability.
+ */
+function sendActiveUsers() {
+    User.find({
+        active: true
+    }, {
+        _id: 0,
+        username: 1
+    }).sort({
+        username: 1
+    }).then(function (users) {
+        console.log(JSON.stringify(users));
+        ioServer.emit('users', users);
+    });
+}
+
+/**
+ * Send a server message to all clients.
+ */
+function sendServerMessage(msg) {
+    ioServer.emit('server-message', msg);
 }

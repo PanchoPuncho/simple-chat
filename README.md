@@ -4,15 +4,17 @@
 ### References
 https://socket.io/get-started/chat
 https://www.npmjs.com/package/socketio-auth
+https://medium.com/@rwillt/authenticating-socket-io-clients-f1e6f39a25fe
 
 ### Repository
 https://github.com/PanchoPuncho/simple-chat
 
-### Server Dependencies
-express@4.15.2  
-socket.io  
-JQuery  
-Bootstrap
+### Database
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
+brew install mongodb
+mkdir -p /data/db
+mongod
+mongo --host 127.0.0.1:27017
 
 ### Run App
 node src/js/server
@@ -33,4 +35,6 @@ http://localhost:3000
 - *Identify user on server*
 - *Display users on client*
 - *Add user authentication*
-- Add user signup
+- *Add user signup*
+- *Move users to a database so we can maintain state past the server's life*
+- Identify message sender on recipient clients

@@ -1,7 +1,7 @@
 angular.module('myApp', []).controller('chatCtrl', function ($scope) {
     // Contains all data pertinent to the app
     $scope.data = {
-        msg: "",
+        msg: '',
         messages: [],
         users: []
     };
@@ -9,16 +9,16 @@ angular.module('myApp', []).controller('chatCtrl', function ($scope) {
     // Contains all data pertinent to the login
     $scope.login = {
         register: false,
-        username: "",
-        password: "",
-        passwordConfirmation: "",
-        warning: ""
+        username: '',
+        password: '',
+        passwordConfirmation: '',
+        warning: ''
     };
 
     // Active User
     $scope.user = {
-        username: "",
-        password: ""
+        username: '',
+        password: ''
     };
 
     /**
@@ -28,39 +28,33 @@ angular.module('myApp', []).controller('chatCtrl', function ($scope) {
 
     /**
      * Validate the login fields before attempting to validate with server.
+     * Handles registration attempts as well for code reuse.
      */
     $scope.validateLogin = function () {
-        if ($scope.login.username && $scope.login.username.trim() !== "") {
-            if ($scope.login.password && $scope.login.password.trim() !== "") {
-                connect();
-            } else {
-                // Clear out invalid password
-                $('#login-password').val('');
-            }
-        } else {
-            // Clear out invalid username
-            $('#login-username').val('');
-        }
-    };
-
-    /**
-     * Validate the registration fields before attempting to validate with server.
-     */
-    $scope.validateRegister = function () {
-        if ($scope.login.username && $scope.login.username.trim() !== "") {
-            if ($scope.login.password && $scope.login.password.trim() !== "") {
-                if ($scope.login.passwordConfirmation && $scope.login.passwordConfirmation.trim() !== "" && $scope.login.password === $scope.login.passwordConfirmation) {
+        if ($scope.login.username && $scope.login.username.trim() !== '') {
+            if ($scope.login.password && $scope.login.password.trim() !== '') {
+                if (!$scope.login.register) {
+                    // Login
                     connect();
                 } else {
-                    // Clear out values if invalid password combo
-                    $('#login-password').val('');
-                    $('#login-password-confirmation').val('');
+                    // Register
+                    if ($scope.login.passwordConfirmation && $scope.login.passwordConfirmation.trim() !== '' &&
+                        $scope.login.password === $scope.login.passwordConfirmation) {
+                        connect();
+                    } else {
+                        $scope.login.warning = 'Passwords Did Not Match';
+                        // Clear out values if invalid password combo
+                        $('#login-password').val('');
+                        $('#login-password-confirmation').val('');
+                    }
                 }
             } else {
+                $scope.login.warning = 'Invalid Password';
                 // Clear out invalid password
                 $('#login-password').val('');
             }
         } else {
+            $scope.login.warning = 'Invalid Username';
             // Clear out invalid username
             $('#login-username').val('');
         }
@@ -81,7 +75,8 @@ angular.module('myApp', []).controller('chatCtrl', function ($scope) {
              */
             socket.emit('authentication', {
                 username: $scope.login.username,
-                password: $scope.login.password
+                password: $scope.login.password,
+                register: $scope.login.register
             });
 
             /**
@@ -90,7 +85,7 @@ angular.module('myApp', []).controller('chatCtrl', function ($scope) {
             socket.on('unauthorized', function (err) {
                 $('#login-password').val('');
                 $scope.login.warning = err.message;
-                $scope.$apply()
+                $scope.$apply();
             });
 
             /**
@@ -109,6 +104,7 @@ angular.module('myApp', []).controller('chatCtrl', function ($scope) {
                 // Populate the list of users
                 socket.on('users', function (users) {
                     $scope.data.users = users;
+                    $scope.$apply();
                 });
 
                 // Append received user messages
