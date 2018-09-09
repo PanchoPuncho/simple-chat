@@ -10,11 +10,17 @@ https://github.com/PanchoPuncho/simple-chat
 - mongod@v4.0.2
 - node@v8.11.4
 
-## Step-by-step instructions
+## Step-by-step instructions (for macOS)
 
 ### Start MongoDB
 
+If needed, https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 `mongod`
+
+### Install the App
+
+If needed, `brew install node`
+`npm install`
 
 ### Open a New Terminal Window and Run the App
 
