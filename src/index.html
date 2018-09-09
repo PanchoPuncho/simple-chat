@@ -1,16 +1,112 @@
-<!doctype html>
-<html>
-    <head>
-        <title>Simple Socket.IO Chat</title>
-        <link rel="stylesheet" href="css/styles.css">
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-        <script type="text/javascript" src="js/client.js"></script>
-    </head>
-    <body>
-        <ul id="messages"></ul>
-        <form action="">
-            <input id="message" autocomplete="off" /><button>Send</button>
-        </form>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Simple Chat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div ng-app="myApp" ng-controller="clientCtrl">
+        <div class="container-fluid nav-side-menu">
+            <div class="brand">Simple Chat</div>
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+            <div class="menu-list">
+                <ul id="menu-content" class="menu-content collapse out">
+                    <li></li>
+                    <li data-toggle="collapse" data-target="#products" class="collapsed">
+                        <a href="#"> Users</a>
+                    </li>
+                    <ul class="collapse" id="products">
+                        <li ng-repeat="user in data.users"><a href="#"><span class="glyphicon glyphicon-user"></span>
+                                {{ user.username }}</a></li>
+                    </ul>
+                    <li></li>
+                    <li>
+                        <a href=".">
+                            <i class="fa fa-users fa-lg"></i> <span class="glyphicon glyphicon-log-in"></span> Sign Out
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid" id="main">
+            <div ng-show="user.username" id="message-box" class="row">
+                <div class="col-md-12">
+                    <h1 class="secondary-color">Welcome, <span class="primary-color">{{
+                            user.username }}!</span></h1>
+                    <ul id="messages" class="list-group"></ul>
+                </div>
+            </div>
+            <div class="container-fluid navbar-fixed-bottom">
+                <form class="form" action="">
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <input id="msg" placeholder="Type your message" autocomplete="off" maxlength="140" class="form-control"
+                                required />
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" class="form-control btn btn-primary primary-background">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Login Modal -->
+        <div class="modal fade" id="loginModal" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h4 class="modal-title">Simple Chat</h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="pull-right"><input type="checkbox" ng-model="login.register" /><label>&nbsp;Register</label></div>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="">
+                        <div class="modal-body">
+                            <h5 ng-show="login.warning" class="primary-color">{{ login.warning }}</h5>
+                            <br ng-show="login.warning" />
+                            <input id="login-username" ng-model="login.username" placeholder="Enter your username"
+                                autocomplete="off" maxlength="32" class="form-control" required />
+                            <input id="login-password" type="password" ng-model="login.password" placeholder="Enter your password"
+                                autocomplete="off" maxlength="32" class="form-control" required />
+                            <input ng-show="login.register" id="login-password-confirmation" type="password" ng-model="login.passwordConfirmation"
+                                placeholder="Confirm your password" autocomplete="off" maxlength="32" class="form-control"
+                                required />
+                        </div>
+                        <div class="modal-footer">
+                            <button ng-show="!login.register" type="submit" class="form-control btn btn-danger"
+                                ng-click="validateLogin()">Sign In</button>
+                            <button ng-show="login.register" type="button" class="form-control btn btn-danger" ng-click="validateLogin()">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <!-- Latest AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- Local style changes -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Local javascript (client code) -->
+    <script src="js/clientCtrl.js"></script>
+</body>
+
 </html>
