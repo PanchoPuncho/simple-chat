@@ -64,11 +64,10 @@ If needed, https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 - User signup (create a username and password), with authentication
   - Using socketio-auth for authentication and MongoDB to store the username, password hash, and user state (active/inactive).
 
-## To Do
+## Running End-To-End Tests
 
-- Test
-- Test more
-- Test more more
+- webdriver-manager update && webdriver-manager start
+- protractor e2e/protractor.conf.js
 
 ## References
 

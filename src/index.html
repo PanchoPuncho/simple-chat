@@ -34,7 +34,7 @@
         <div class="container-fluid" id="main">
             <div ng-show="user.username" id="message-box" class="row">
                 <div class="col-md-12">
-                    <h1 class="secondary-color">Welcome, <span class="primary-color">{{
+                    <h1 class="secondary-color e2e-login-result">Welcome, <span class="primary-color">{{
                             user.username }}!</span></h1>
                     <ul id="messages" class="list-group"></ul>
                 </div>
@@ -64,7 +64,7 @@
                                 <h4 class="modal-title">Simple Chat</h4>
                             </div>
                             <div class="col-sm-6">
-                                <div class="pull-right"><input type="checkbox" ng-model="login.register" /><label>&nbsp;Register</label></div>
+                                <div class="pull-right"><input type="checkbox" ng-model="login.register" class="e2e-register-checkbox" /><label>&nbsp;Register</label></div>
                             </div>
                         </div>
                     </div>
@@ -73,17 +73,18 @@
                             <h5 ng-show="login.warning" class="primary-color">{{ login.warning }}</h5>
                             <br ng-show="login.warning" />
                             <input id="login-username" ng-model="login.username" placeholder="Enter your username"
-                                autocomplete="off" maxlength="32" class="form-control" required />
+                                autocomplete="off" maxlength="32" class="form-control e2e-login-username" required />
                             <input id="login-password" type="password" ng-model="login.password" placeholder="Enter your password"
-                                autocomplete="off" maxlength="32" class="form-control" required />
+                                autocomplete="off" maxlength="32" class="form-control e2e-login-password" required />
                             <input ng-show="login.register" id="login-password-confirmation" type="password" ng-model="login.passwordConfirmation"
-                                placeholder="Confirm your password" autocomplete="off" maxlength="32" class="form-control"
+                                placeholder="Confirm your password" autocomplete="off" maxlength="32" class="form-control e2e-login-confirm"
                                 required />
                         </div>
                         <div class="modal-footer">
-                            <button ng-show="!login.register" type="submit" class="form-control btn btn-danger"
+                            <button ng-show="!login.register" type="submit" class="form-control btn btn-danger e2e-login-button"
                                 ng-click="validateLogin()">Sign In</button>
-                            <button ng-show="login.register" type="button" class="form-control btn btn-danger" ng-click="validateLogin()">Register</button>
+                            <button ng-show="login.register" type="button" class="form-control btn btn-danger e2e-register-button"
+                                ng-click="validateLogin()">Register</button>
                         </div>
                     </form>
                 </div>
