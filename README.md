@@ -26,8 +26,8 @@ https://github.com/PanchoPuncho/simple-chat
 
 ### Start MongoDB
 
-If needed, https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/  
-`mongod`
+- If needed, https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
+- `mongod`
 
 ### Open a New Terminal Window and Run the App
 
@@ -66,11 +66,13 @@ If needed, https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
 ## Running End-To-End Tests
 
-- webdriver-manager update && webdriver-manager start
-- protractor e2e/protractor.conf.js
+- Tab0: `mongod`
+- Tab1: `node src/js/server`
+- Tab3: `webdriver-manager update && webdriver-manager start`
+- Tab4: `protractor e2e/protractor.conf.js`
 
 ## References
 
-https://socket.io/get-started/chat  
-https://www.npmjs.com/package/socketio-auth  
-https://medium.com/@rwillt/authenticating-socket-io-clients-f1e6f39a25fe  
+- https://socket.io/get-started/chat
+- https://www.npmjs.com/package/socketio-auth
+- https://medium.com/@rwillt/authenticating-socket-io-clients-f1e6f39a25fe
