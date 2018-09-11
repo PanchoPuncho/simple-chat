@@ -26,8 +26,8 @@ https://github.com/PanchoPuncho/simple-chat
 
 ### Start MongoDB
 
-If needed, https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/  
-`mongod`
+- If needed, https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
+- `mongod`
 
 ### Open a New Terminal Window and Run the App
 
@@ -64,14 +64,15 @@ If needed, https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 - User signup (create a username and password), with authentication
   - Using socketio-auth for authentication and MongoDB to store the username, password hash, and user state (active/inactive).
 
-## To Do
+## Running End-To-End Tests
 
-- Test
-- Test more
-- Test more more
+- Tab0: `mongod`
+- Tab1: `node src/js/server`
+- Tab3: `webdriver-manager update && webdriver-manager start`
+- Tab4: `protractor e2e/protractor.conf.js`
 
 ## References
 
-https://socket.io/get-started/chat  
-https://www.npmjs.com/package/socketio-auth  
-https://medium.com/@rwillt/authenticating-socket-io-clients-f1e6f39a25fe  
+- https://socket.io/get-started/chat
+- https://www.npmjs.com/package/socketio-auth
+- https://medium.com/@rwillt/authenticating-socket-io-clients-f1e6f39a25fe

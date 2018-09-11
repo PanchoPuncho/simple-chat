@@ -137,7 +137,8 @@ function toggleUserState(username, state) {
 
 /**
  * Send the list of active users to all clients.
- * TODO - refactor for scalability.
+ * TODO - refactor for scalability as this sends
+ * the entire list instead of incremental updates.
  */
 function sendActiveUsers() {
     User.find({
