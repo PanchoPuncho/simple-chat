@@ -127,12 +127,12 @@ function toggleUserState(username, state) {
     User.findOneAndUpdate({
         username: username
     }, {
-        $set: {
-            active: state
-        }
-    }).then(function (user) {
-        sendActiveUsers();
-    });
+            $set: {
+                active: state
+            }
+        }).then(function (user) {
+            sendActiveUsers();
+        });
 }
 
 /**
@@ -144,13 +144,13 @@ function sendActiveUsers() {
     User.find({
         active: true
     }, {
-        _id: 0,
-        username: 1
-    }).sort({
-        username: 1
-    }).then(function (users) {
-        ioServer.emit('users', users);
-    });
+            _id: 0,
+            username: 1
+        }).sort({
+            username: 1
+        }).then(function (users) {
+            ioServer.emit('users', users);
+        });
 }
 
 /**

@@ -68,7 +68,8 @@ https://github.com/PanchoPuncho/simple-chat
 
 - Tab0: `mongod`
 - Tab1: `node src/js/server`
-- Tab3: `webdriver-manager update && webdriver-manager start`
+- Tab3: If `webdriver-manager` is not in the path, run `export PATH="$PATH:./node_modules/.bin"`
+- Tab3: `sudo webdriver-manager update --standalone --versions.standalone=3.8.0 && sudo webdriver-manager start --versions.standalone=3.8.0`
 - Tab4: `protractor e2e/protractor.conf.js`
 
 ## References
